@@ -5,6 +5,10 @@ pipeline {
         PORT = '7000'
     }
 
+     tools {
+        nodejs 'NodeJS' // This should match the NodeJS installation name from Global Tool Configuration
+    }
+
     stages {
         stage('Checkout') {
             steps {
