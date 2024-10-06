@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                // checkout scm
                 git credentialsId: 'github-credentials', url: 'https://github.com/ShubhamDarade/mern-test.git'
             }
         }
