@@ -5,11 +5,15 @@ pipeline {
         PORT = '7000'
     }
 
+     tools {
+        nodejs 'node' // This should match the NodeJS installation name from Global Tool Configuration
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
-                git credentialsId: 'github-credentials', url: 'https://github.com/ShubhamDarade/mern-test.git'
+                // checkout scm
+                git 'https://github.com/ShubhamDarade/mern-test.git'
             }
         }
         stage('Install Dependencies') {
