@@ -6,14 +6,14 @@ pipeline {
     }
 
      tools {
-        nodejs 'NodeJS' // This should match the NodeJS installation name from Global Tool Configuration
+        nodejs 'node' // This should match the NodeJS installation name from Global Tool Configuration
     }
 
     stages {
         stage('Checkout') {
             steps {
                 // checkout scm
-                git credentialsId: 'github-credentials', url: 'https://github.com/ShubhamDarade/mern-test.git'
+                git 'https://github.com/ShubhamDarade/mern-test.git'
             }
         }
         stage('Install Dependencies') {
