@@ -1,0 +1,40 @@
+name: Node.js CI
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      env:
+        PORT: ${{ secrets.PORT }}
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+      run: npm test
+
+    - name: Upload test results if tests fail
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: test-results.xml
