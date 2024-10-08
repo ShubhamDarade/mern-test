@@ -9,6 +9,13 @@ exports.register = async (req, res) => {
     const c = 10
     const d = 15
 
+    //     Developers will need to create their own .env and .env.test: Since .env and .env.test files are ignored by Git, developers will need to create these files manually by copying the contents of .env.sample and .env.test.sample. The sample files will help them know what environment variables they need to define.
+
+    // Typically, developers do this by running:
+    //     cp .env.sample .env
+    // cp .env.test.sample .env.test
+
+
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
