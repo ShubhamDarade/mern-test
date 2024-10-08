@@ -7,6 +7,7 @@ exports.register = async (req, res) => {
     const { name, email, password } = req.body;
     const b = 10
     const c = 10
+    const d = 15
 
     try {
         const existingUser = await User.findOne({ email });
