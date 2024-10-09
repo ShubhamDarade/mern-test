@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '.env.test' });
+require('dotenv').config();
 const express = require('express');
 const db = require('./database/db');
 const authRoutes = require('./routes/authRoutes');
