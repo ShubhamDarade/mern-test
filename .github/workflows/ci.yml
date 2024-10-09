@@ -23,8 +23,10 @@ jobs:
 
     - name: Run tests
       env:
-        PORT: 7000
-        MONGO_URI: mongodb+srv://Shubham:12345@cluster0.qpyce6w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+        # PORT: 7000
+        # MONGO_URI: mongodb+srv://Shubham:12345@cluster0.qpyce6w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+        PORT: ${{ secrets.PORT }}
+        MONGO_URI: ${{ secrets.MONGO_URI }}
       run: npm test
 
     - name: Upload test results if tests fail
