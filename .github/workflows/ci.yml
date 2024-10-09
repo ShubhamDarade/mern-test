@@ -24,7 +24,7 @@ jobs:
     - name: Run tests
       env:
         PORT: 7000
-        MONGO_URI: mongodb://127.0.0.1:27017/proj-test
+        MONGO_URI: mongodb+srv://Shubham:12345@cluster0.qpyce6w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       run: npm test
 
     - name: Upload test results if tests fail
