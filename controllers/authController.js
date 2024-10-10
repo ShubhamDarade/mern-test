@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const logger = require('../utils/logger');
 
 // Registration
 exports.register = async (req, res) => {
@@ -14,7 +15,9 @@ exports.register = async (req, res) => {
 
     try {
         const existingUser = await User.findOne({ email });
+
         if (existingUser) {
+            logger.error(`Email already exists`)
             return res.status(400).json({ message: 'Email already exists' });
         }
 
@@ -22,8 +25,10 @@ exports.register = async (req, res) => {
         const user = new User({ name, email, password: hashedPassword });
         await user.save();
 
+        logger.info(`User registered successfully`)
         res.status(201).json({ message: 'User registered successfully' });
     } catch (err) {
+        logger.error(`Server error`)
         res.status(500).json({ message: 'Server error' });
     }
 };
@@ -35,17 +40,21 @@ exports.login = async (req, res) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
+            logger.error(`Invalid email or password`)
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
+            logger.error(`Invalid email or password`)
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
         const token = jwt.sign({ userId: user._id }, 'secretkey', { expiresIn: '1h' });
+        logger.info(`User login successfully`)
         res.status(200).json({ token });
     } catch (err) {
+        logger.error(`Server error`)
         res.status(500).json({ message: 'Server error' });
     }
 };
