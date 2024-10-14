@@ -54,3 +54,21 @@ jobs:
         with:
           name: test-results
           path: test-results.xml
+
+  coverage:
+    name: Check Code Coverage
+    runs-on: ubuntu-latest
+    container:
+      image: node:20
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check code coverage
+        run: npx jest --coverage
