@@ -1,38 +1,39 @@
-name: Node.js CI
+# name: Node.js CI
 
-on:
-  pull_request:
-    branches:
-      - main
-      - master
+# on:
+#   pull_request:
+#     branches:
+#       - main
+#       - master
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    container:
-      image: node:20
+# jobs:
+#   Test:
+#     runs-on: ubuntu-latest
+#     container:
+#       image: node:20
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          node-version: 20
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+#         with:
+#           node-version: 20
 
-      - name: Install dependencies
-        run: npm install
+#       - name: Install dependencies
+#         run: npm install
 
-      - name: Run tests
-        env:
-          PORT: ${{ secrets.PORT }}
-          MONGO_URI: ${{ secrets.MONGO_URI }}
-        run: npm test
+#       - name: Run tests
+#         env:
+#           PORT: ${{ secrets.PORT }}
+#           MONGO_URI: ${{ secrets.MONGO_URI }}
+#         run: npm test
 
-      - name: Upload test results if tests fail
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: test-results.xml
+#       - name: Upload test results if tests fail
+#         if: failure()
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: test-results
+#           path: test-results.xml
+
 # name: Node.js CI
 
 # on:
@@ -108,3 +109,59 @@ jobs:
 #           name: test-results
 #           path: test-results.xml
 
+name: Node.js CI
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  # Prettier job
+  prettier:
+    name: Prettier Check
+    runs-on: ubuntu-latest
+    container:
+      image: node:20
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Prettier check
+        run: npx prettier --check .
+
+  # Test job
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    container:
+      image: node:20
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        env:
+          PORT: ${{ secrets.PORT }}
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+        run: npm test
+
+      - name: Upload test results if tests fail
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: test-results.xml
