@@ -4,3 +4,4 @@ node_modules
 *.log
 README.md
 .github\workflows\ci.yml
+coverage/
