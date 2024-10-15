@@ -1,0 +1,49 @@
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Handle line endings for specific file types
+
+# These are text files
+*.c         text
+*.cpp       text
+*.h         text
+*.py        text
+*.java      text
+*.html      text
+*.css       text
+*.js        text
+*.jsx       text
+*.ts        text
+*.tsx       text
+*.json      text
+*.md        text
+*.txt       text
+
+# These are binary files and should not be modified
+*.jpg       binary
+*.jpeg      binary
+*.png       binary
+*.gif       binary
+*.ico       binary
+*.zip       binary
+*.gz        binary
+*.tar       binary
+*.pdf       binary
+*.mp4       binary
+*.mp3       binary
+
+# Ensure shell scripts have LF line endings
+*.sh        eol=lf
+
+# Windows-specific files should use CRLF line endings
+*.bat       eol=crlf
+
+# Node.js dependencies shouldn't be modified
+package-lock.json  text eol=lf
+
+# Prevent modification of Docker-related files
+Dockerfile  text eol=lf
+
+# Handle .env and other configuration files
+*.env       text eol=lf
+*.env.sample text eol=lf

@@ -2,4 +2,6 @@ node_modules
 .env
 .env.test
 *.log
+README.md
+.github\workflows\ci.yml
 coverage/
