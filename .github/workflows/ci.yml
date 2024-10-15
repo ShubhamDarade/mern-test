@@ -71,4 +71,7 @@ jobs:
         run: npm install
 
       - name: Check code coverage
+        env:
+          PORT: ${{ secrets.PORT }}
+          MONGO_URI: ${{ secrets.MONGO_URI }}
         run: npx jest --coverage
