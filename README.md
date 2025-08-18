@@ -134,6 +134,25 @@ This will execute all the unit and integration tests defined in the project.
 
 ---
 
+## Postman Collection for API Testing
+
+We've included a Postman collection for testing the API. You can find it in the `postman/` directory.
+
+### How to Use the Postman Collection:
+
+1. Download the [Postman collection](postman/collection.json) from the repository.
+2. Open Postman and go to **File > Import**.
+3. Choose the downloaded `collection.json` file.
+4. Use the imported requests to test the API.
+
+---
+
+## API Documentation
+
+Swagger documentation is available for the API. To access it, run the server and visit [http://localhost:8000/api-docs](http://localhost:8000/api-docs).
+
+---
+
 ## Contributing
 
 We welcome contributions to this project! To contribute, please follow these steps:
